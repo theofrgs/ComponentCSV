@@ -1,0 +1,35 @@
+version: "3.3"
+
+services:
+  web:
+    image: web
+    container_name: web
+    build: web
+    ports:
+      - "3000:3000"
+    networks:
+      - web-tier
+    restart: always
+    environment:
+      - 0.0.0.0
+
+  server:
+    image: server
+    container_name: server
+    build: server
+    ports:
+      - "8080:8080"
+    networks:
+      - server-tier
+    restart: always
+    environment:
+      - 0.0.0.0
+
+volumes:
+  mariadb:
+
+networks:
+  web-tier:
+    driver: bridge
+  server-tier:
+    driver: bridge
